@@ -5,8 +5,8 @@
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
 | nick_name          | string | null: false               |
-| email              | string | null: false               |
-| encrypted_password | string | null: false, unique: true |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
 | last_name_kana     | string | null: false               |
@@ -23,7 +23,7 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | title              | string     | null: false                    |
-| text               | text       | null: false                    |
+| explanation        | text       | null: false                    |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | delivery_charge_id | integer    | null: false                    |
@@ -34,14 +34,13 @@
 
 ### Association
 
-- has_one :orders
+- has_one :order
 - belongs_to :user
 
 ## orders テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| buyer   | string     | null: false                    |
 | user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
 
@@ -59,7 +58,7 @@
 | prefectures_id | integer    | null: false                    |
 | municipality   | string     | null: false                    |
 | address        | string     | null: false                    |
-| building_name  | string     | null: true                     |
+| building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
 | order          | references | null: false, foreign_key: true |
 
