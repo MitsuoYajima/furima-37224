@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :days_to_ship
 
+  validates :image,              presence: true
   validates :title,              presence: true
   validates :explanation,        presence: true
   validates :category_id,        presence: true, numericality: { other_than: 1 , message: "can't be blank" } 
@@ -17,6 +18,6 @@ class Item < ApplicationRecord
   validates :delivery_charge_id, presence: true, numericality: { other_than: 1 , message: "can't be blank" } 
   validates :prefecture_id,      presence: true, numericality: { other_than: 1 , message: "can't be blank" } 
   validates :days_to_ship_id,    presence: true, numericality: { other_than: 1 , message: "can't be blank" } 
-  validates :price,              presence: true
+  validates :price,              presence: true, numericality: { greater_than: 299,less_than: 10000000, only_integer: true }
   validates :user,               presence: true
 end
