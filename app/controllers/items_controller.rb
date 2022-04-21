@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # before_action :authenticate_user!, except: [:index, :show]
-  before_action :contributor_confirmation, only: [:new, :edit, :update, :destroy]
+  before_action :contributor_confirmation, only: [:new]
 
   def index
 
@@ -23,10 +23,6 @@ class ItemsController < ApplicationController
   end
 
   private
-
-  def iteme_params
-    params.require(:item).permit(:content, :image)
-  end
 
   def contributor_confirmation
     redirect_to new_user_session_path unless current_user
