@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :items
+  # has_many :orders
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :nick_name, presence: true
@@ -15,5 +18,4 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'Include both letters and numbers' }
-
 end
