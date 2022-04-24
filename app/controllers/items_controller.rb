@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :contributor_confirmation, only: [:new]
 
   def index
-
+    @items = Item.all
   end
 
   # def destroy
