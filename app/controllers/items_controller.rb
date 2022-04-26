@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :contributor_confirmation, only: [:new]
   before_action :set_item, only: [:show, :edit, :update]
   before_action :move_to_index, except: [:index, :new, :create, :show]
 
@@ -46,10 +45,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image,:title,:explanation,:category_id,:condition_id,:delivery_charge_id,:prefecture_id,:days_to_ship_id,:price).merge(user_id: current_user.id)
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
   end
 
   def move_to_index
