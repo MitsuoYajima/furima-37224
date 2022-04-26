@@ -43,12 +43,12 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:image,:title,:explanation,:category_id,:condition_id,:delivery_charge_id,:prefecture_id,:days_to_ship_id,:price).merge(user_id: current_user.id)
+  def contributor_confirmation
+    redirect_to new_user_session_path unless current_user
   end
 
-  def set_item
-    @item = Item.find(params[:id])
+  def item_params
+    params.require(:item).permit(:image,:title,:explanation,:category_id,:condition_id,:delivery_charge_id,:prefecture_id,:days_to_ship_id,:price).merge(user_id: current_user.id)
   end
 
   def move_to_index
