@@ -7,8 +7,8 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  # def destroy
-  # end
+  def destroy
+  end
 
   def new
     @item = Item.new
