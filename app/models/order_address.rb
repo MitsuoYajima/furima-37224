@@ -9,13 +9,13 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank" } 
     validates :municipality
     validates :address
-    validates :phone_number, format: {with: /^0\d{9,10}$/, only_integer: true }
+    validates :phone_number, format: {with: /\A0\d{9,10}\Z/, only_integer: true }
     validates :order_id
   end
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
-    address = Address.create(prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone_number: phone_number, order_id: order.id)
+    shipping_address = ShippingAddress.create(prefecture_id: prefecture_id, municipality: municipality, address: address, building_name: building_name, phone_number: phone_number, order_id: order.id)
   end
 
 end
