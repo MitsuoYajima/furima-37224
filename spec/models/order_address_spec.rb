@@ -12,6 +12,10 @@ RSpec.describe OrderAddress, type: :model do
       it 'token, post_code、prefecture_id、municipality、address,building_name,phone_numberが存在すれば登録できる' do
         expect(@order).to be_valid
       end
+      it 'building_nameは空でも購入できる' do
+        @order.building_name = ''
+        expect(@order).to be_valid
+      end
     end
     context '商品購入できないとき' do
       it 'tokenが空では出品出来ない' do
@@ -53,6 +57,26 @@ RSpec.describe OrderAddress, type: :model do
         @order.phone_number = '090-1234-5678'
         @order.valid?
         expect(@order.errors.full_messages).to include "Phone number Input only number"
+      end
+      it 'phone_numberが9桁以下では登録出来ない' do
+        @order.phone_number = '123456789'
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number is too short"
+      end
+      it 'phone_numberが12桁以上では登録出来ない' do
+        @order.phone_number = '123456789012'
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Phone number is too long"
+      end
+      it 'userが紐付いていないと出品出来ない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include "User can't be blank"
+      end
+      it 'itemが紐付いていないと出品出来ない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include "Item can't be blank"
       end
     end
   end
